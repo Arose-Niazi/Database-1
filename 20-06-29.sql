@@ -1,7 +1,7 @@
-1)
+-- 1)
 CREATE DATABASE `Excise&Taxation`;
 ----------------------------------------------------------------------------------------
-2)
+-- 2)
 CREATE TABLE VehicleRegistration (
 	`Registration#` VARCHAR(20) PRIMARY KEY,
 	registrationDate DATE,
@@ -26,7 +26,7 @@ CREATE TABLE VehicleRegistration (
 CREATE INDEX idx_oc
 ON VehicleRegistration (ownerCNIC);
 ----------------------------------------------------------------------------------------
-3)
+-- 3)
 INSERT INTO `VehicleRegistration` (`Registration#`, `registrationDate`, `vehicleType`, `vendorName`, `modelName`, `makeYear`, `horsePower C/C`, `seatingCapacity`, `color`, `commercial`, `imported/local`, `description`, `ownerCNIC`, `cityName`) 
 VALUES 
 ('3213123', '2020-06-01', 'car', 'Toyata', 'Altis 1.6', '2020', '1600', '5', 'Black', 'N', 'local', NULL, '31202-282111-4', 'Islamabad'), 
@@ -35,25 +35,25 @@ VALUES
 ('9732948', '2020-05-13', 'Truck', 'Mercedes-Benz', 'Actros', '2015', '8160', '3', 'Red', 'Y', 'imported', NULL, '61101-231324-1', 'Karachi'), 
 ('9472348', '2020-05-12', 'Truck', 'Mercedes-Benz', 'Actros V2', '2016', '8160', '3', 'Blue', 'Y', 'imported', NULL, '61101-231324-1', 'Karachi');
 ----------------------------------------------------------------------------------------
-4)
+-- 4)
 ALTER TABLE VehicleRegistration 
 ADD CONSTRAINT ch_com CHECK (commercial IN ('Y','N'));
 ----------------------------------------------------------------------------------------
-5)
+-- 5)
 CREATE INDEX idx_vn_c
 ON VehicleRegistration (vendorName,color);
 ----------------------------------------------------------------------------------------
-6)
+-- 6)
 DROP INDEX 	idx_oc ON VehicleRegistration; 
 *Errors*
 1) There is no ownerName column. The one column in OwnerDetails does not have index applied.
 2) Assuming it's ownerCNIC, can't remove due to foreign key.
 ----------------------------------------------------------------------------------------
-7)
+-- 7)
 ALTER TABLE VehicleRegistration
 DROP CONSTRAINT ch_my;
 ----------------------------------------------------------------------------------------
-8)
+-- 8)
 CREATE TABLE OwnerDetail (
 	OwnerCNIC CHAR(15) PRIMARY KEY,
 	ownerName VARCHAR(50) NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE OwnerDetail (
 );
 
 ----------------------------------------------------------------------------------------
-9)
+-- 9)
 INSERT INTO `OwnerDetail` (`OwnerCNIC`, `ownerName`, `city`, `address`, `phone#`, `email`) 
 VALUES 
 ('61101-3894355-7', 'Arose Niazi', 'Lahore', '66 1D, Block B, Askari 11', '0315-2033333', 'arose.niazi@yahoo.com'), 
@@ -73,7 +73,7 @@ VALUES
 ('33123-934829-9', 'Shafatullah', 'Karachi', 'Urugi town', '0331-4324182', 'shafullah@gmail.com'), 
 ('61101-231324-1', 'Ahmad Khan', 'Islamabad', 'House 2, Street 4, G10/3', '0304-4912341', NULL);
 ----------------------------------------------------------------------------------------
-10)
+-- 10)
 CREATE INDEX idx_PH
 ON OwnerDetail (`phone#`);
 ----------------------------------------------------------------------------------------
@@ -85,7 +85,7 @@ CREATE TABLE RegistrationCity (
 	address VARCHAR(256) NOT NULL
 );
 ----------------------------------------------------------------------------------------
-12)
+-- 12)
 INSERT INTO `RegistrationCity` (`cityName`, `branchName`, `phone#`, `address`) 
 VALUES 
 ('Mianwali', 'Wattakhel Chowk Branch', '0900-7860113', 'Mianwali Multan Road, Mian'), 
@@ -94,9 +94,9 @@ VALUES
 ('Karachi', 'Talwar Branch', '0900-7860114', 'Next to McDoanalds'), 
 ('Lahore', 'DHA Branch', '0900-7860115', 'H Block DHA Phase 5');
 ----------------------------------------------------------------------------------------
-13)
+-- 13)
 ALTER TABLE RegistrationCity 
 ADD CONSTRAINT ch_citname CHECK (cityName IN ('Mianwali','Islamabad','Rawalipindi','Karachi','Lahore','Sargodha','Multan'));
 ----------------------------------------------------------------------------------------
-14)
+-- 14)
 SELECT COUNT(`Registration#`) FROM VehicleRegistration WHERE cityName = 'Lahore'

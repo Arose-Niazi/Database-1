@@ -8,6 +8,6 @@ SELECT * FROM Staff s WHERE EXISTS (SELECT Staff.* FROM Staff a WHERE a.salary =
 SELECT Client.* FROM Client, PrivateOwner WHERE Client.tellNo = PrivateOwner.tellNo;
 SELECT Branch.branchNo, COUNT(t.branchNo) FROM Branch LEFT JOIN (SELECT Registration.branchNo FROM Registration WHERE Registration.dateJoined BETWEEN '2013-05-01' AND '2013-05-31') AS t ON Branch.branchNo = t.branchNo GROUP BY Branch.branchNo
 SELECT * FROM PrivateOwner s WHERE EXISTS (SELECT PrivateOwner.* FROM PrivateOwner a WHERE a.tellNo = s.tellNo AND a.OwnerNo != s.OwnerNo);
-
-Special Query -> Will Give all the clients in May. 
+-- 
+-- Special Query -> Will Give all the clients in May. 
 SELECT Branch.branchNo, COUNT(t.branchNo) AS `Registrations in May` FROM Branch LEFT JOIN (SELECT Registration.branchNo,MONTH(Registration.dateJoined) AS Month FROM Registration HAVING Month  = 5) AS t ON Branch.branchNo = t.branchNo GROUP BY Branch.branchNo;

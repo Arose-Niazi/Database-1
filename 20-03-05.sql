@@ -1,7 +1,7 @@
 SELECT staff.* FROM staff ORDER BY staff.fName DESC, staff.salary ASC;
 SELECT * FROM propertyforrent WHERE NOT EXISTS (SELECT viewing.propertyNo FROM viewing WHERE  viewing.propertyNo = propertyforrent.propertyNo);
 SELECT propertyforrent.propertyNo, COUNT(viewing.clientNo) FROM propertyforrent LEFT JOIN viewing ON viewing.propertyNo = propertyforrent.propertyNo GROUP BY propertyforrent.propertyNo;
-INVALID----
+-- INVALID----
 SELECT COUNT(propertyNo) FROM propertyforrent WHERE ownerNo = 'CO76';
 SELECT privateowner.*, COUNT(propertyforrent.propertyNo) FROM privateowner LEFT JOIN propertyforrent ON privateowner.OwnerNo = propertyforrent.ownerNo GROUP BY privateowner.OwnerNo;
 SELECT * FROM staff WHERE NOT EXISTS (SELECT registration.staffNo FROM registration WHERE  registration.staffNo = staff.staffNo);

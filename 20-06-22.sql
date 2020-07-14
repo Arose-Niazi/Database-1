@@ -1,19 +1,19 @@
-1)
+-- 1)
 CREATE DATABASE 4Brothers;
 ----------------------------------------------------------------
-2)
+-- 2)
 CREATE TABLE Employee(
 	empID INT UNSIGNED PRIMARY KEY,
-	fName VARCHAR(20) NOT NULL,
+	fName VARCHAR(20),
 	lName VARCHAR(20),
 	dateOfBirth DATE,
-	position ENUM('Manager','Supervisor') DEFAULT('Manager'),
+	position ENUM('Manager','Supervisor'),
 	salary INT(8) UNSIGNED,
-	email VARCHAR(128) UNIQUE,
-	phoneNumber VARCHAR(16) NOT NULL
+	email VARCHAR(128),
+	phoneNumber VARCHAR(16)
 );
 ----------------------------------------------------------------
-3)
+-- 3)
 INSERT INTO Employee 
 	(empID, fName, lName, dateOfBirth, position, salary, email, phoneNumber) 
 VALUES 
@@ -23,44 +23,50 @@ VALUES
 	(4, 'Aeman', 'Fatima', '2000-07-18', 'Supervisor', 65000, 'aeman098.fatima@gmail.com', '+923230465309'), 
 	(5, 'Fuad', 'Mufti', '1999-12-25', 'Supervisor', 90000, 'fuadmufti20@gmail.com', '+923321403309');
 ----------------------------------------------------------------
-4)
+-- 4)
 ALTER TABLE Employee
-DROP CONSTRAINT email
+ADD COLUMN joiningDate DATE NOT NULL;
 ----------------------------------------------------------------
-5)
+-- 5)
 ALTER TABLE Employee
-ADD CONSTRAINT uni_name UNIQUE(lName)
+DROP COLUMN salary;
 ----------------------------------------------------------------
-6)
+-- 6)
+SELECT joiningDate FROM Employee;
+SELECT salary FROM Employee; -- //Should Return Error
+----------------------------------------------------------------
+-- 7)
+-- You can not change from DATE to YEAR in MYSQL!
+-- To work this around I used this,
+
 ALTER TABLE Employee
-ADD CONSTRAINT uni_mailNum UNIQUE(email,phoneNumber)
-----------------------------------------------------------------
-7)
+ADD COLUMN dateOfBirthY YEAR;
+
+UPDATE Employee SET dateOfBirthY = YEAR(dateOfBirth);
+
 ALTER TABLE Employee
-MODIFY COLUMN fName varchar(20) NULL
-----------------------------------------------------------------
-8)
+DROP COLUMN dateOfBirth;
+
 ALTER TABLE Employee
-MODIFY COLUMN salary INT(8) UNSIGNED NOT NULL
-----------------------------------------------------------------
-9)
+RENAME COLUMN dateOfBirthY dateOfBirth;
+
 ALTER TABLE Employee
-DROP CONSTRAINT PRIMARY KEY
+CHANGE COLUMN dateOfBirthY dateOfBirth YEAR;
 ----------------------------------------------------------------
-10)
-ALTER TABLE Employee
-ADD CONSTRAINT pk_name UNIQUE(fName,lName)
+-- 8)
+TRUNCATE Employee;
 ----------------------------------------------------------------
-11)
-ALTER TABLE Employee
-ALTER position DROP DEFAULT
+-- 9)
+SELECT * FROM Employee;
 ----------------------------------------------------------------
-12)
-ALTER TABLE Employee
-ALTER empID SET DEFAULT 100
+-- 10)
+DROP TABLE Employee;
 ----------------------------------------------------------------
-12)
-SHOW DATABASES;
+-- 11)
+SELECT * FROM Employee; -- //Should Return Error
 ----------------------------------------------------------------
-12)
-SHOW TABLES;
+-- 12)
+DROP DATABASE 4Brothers;
+----------------------------------------------------------------
+-- 13)
+USE 4Brothers; -- //Should Return Error

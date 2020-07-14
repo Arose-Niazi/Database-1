@@ -10,7 +10,7 @@ SELECT * FROM Client WHERE Client.maxRent = 425 AND Client.prefType = 'Flat';
 SELECT PrivateOwner.*,PropertyForRent.* FROM PrivateOwner,PropertyForRent WHERE PrivateOwner.OwnerNo = PropertyForRent.ownerNo; 
 SELECT Client.* FROM Client,Viewing WHERE Client.clientNo = Viewing.clientNo AND Viewing.comment = 'Too Small';
 SELECT * FROM PrivateOwner WHERE PrivateOwner.address LIKE '%Glasgow%';
-or
+-- or
 SELECT DISTINCT PrivateOwner.* FROM PrivateOwner,PropertyForRent WHERE PrivateOwner.address LIKE '%Glasgow%' AND PrivateOwner.ownerNo = PropertyForRent.ownerNo;
 SELECT * FROM PrivateOwner WHERE PrivateOwner.tellNo LIKE '%41%';
 SELECT PrivateOwner.ownerNo,COUNT(PropertyForRent.propertyNo) FROM PrivateOwner LEFT JOIN PropertyForRent ON PrivateOwner.ownerNo = PropertyForRent.ownerNo GROUP BY PrivateOwner.OwnerNo
