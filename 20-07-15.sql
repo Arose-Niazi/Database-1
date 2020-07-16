@@ -35,4 +35,4 @@ SELECT COUNT(*) AS 'Properties Registered' FROM propertyForRent WHERE staffNo = 
 SELECT COUNT(*) AS 'Properties Registered' FROM propertyForRent LEFT JOIN staff ON propertyForRent.staffNo = staff.staffNo WHERE staff.fName = 'John';
 ----------------------------------------------------------------------------------------
 -- 13)
-SELECT * FROM propertyForRent AS pfr, privateOwner AS po, branch AS b WHERE pfr.ownerNo = po.ownerNo AND pfr.branchNo = b.branchNo;
+SELECT * FROM propertyForRent AS pfr INNER JOIN privateOwner AS po ON pfr.ownerNo = po.ownerNo INNER JOIN branch AS b ON pfr.branchNo = b.branchNo;
