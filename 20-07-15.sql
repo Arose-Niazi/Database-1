@@ -14,7 +14,7 @@ SELECT pfr.* FROM propertyForRent AS pfr INNER JOIN privateOwner AS po ON pfr.ow
 SELECT CONCAT(s.fName,' ', s.lName) AS Name FROM propertyForRent AS pfr JOIN staff AS s ON pfr.staffNo = s.staffNo WHERE pfr.propertyNo = 'PG36';
 ----------------------------------------------------------------------------------------
 -- 6)
-SELECT pfr.* FROM propertyForRent AS pfr INNER JOIN branch AS b ON pfr.branchNo = b.branchNo WHERE b.branchNo = 'B005' AND pfr.city = 'London';
+SELECT pfr.* FROM propertyForRent AS pfr INNER JOIN branch AS b ON pfr.branchNo = b.branchNo WHERE b.branchNo = 'B005' AND b.city = 'London';
 ----------------------------------------------------------------------------------------
 -- 7)
 SELECT CONCAT(MIN(rent), ' - ', MAX(rent)) AS `Rent Range` FROM propertyForRent AS pfr INNER JOIN branch AS b ON pfr.branchNo = b.branchNo WHERE pfr.city = 'Glasgow' AND type = 'Flat';
