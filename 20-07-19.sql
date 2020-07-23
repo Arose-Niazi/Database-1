@@ -23,13 +23,17 @@ SELECT * FROM privateOwner WHERE ownerNo NOT IN (SELECT ownerNo FROM propertyFor
 SELECT * FROM staff RIGHT JOIN propertyForRent ON staff.staffNo = propertyForRent.staffNo;
 ----------------------------------------------------------------------------------------
 -- 9)
-SELECT * FROM branch,staff; -- The question doesn't ask for their staff.
+SELECT * FROM branch LEFT JOIN staff ON branch.branchNo = staff.branchNo
+UNION
+SELECT * FROM branch RIGHT JOIN staff ON branch.branchNo = staff.branchNo;
 ----------------------------------------------------------------------------------------
 -- 10)
-SELECT * FROM branch,propertyForRent; -- The question asks for all branches and all properties
+SELECT * FROM branch LEFT JOIN PropertyForRent ON branch.branchNo = PropertyForRent.branchNo
+UNION
+SELECT * FROM branch RIGHT JOIN PropertyForRent ON branch.branchNo = PropertyForRent.branchNo;
 ----------------------------------------------------------------------------------------
 -- 11)
-SELECT * FROM client LEFT JOIN viewing ON client.clientNo = viewing.clientNo; -- This doesn't ask for all viewings so added join
+SELECT * FROM client LEFT JOIN viewing ON client.clientNo = viewing.clientNo; 
 ----------------------------------------------------------------------------------------
 -- 12)
 SELECT * FROM propertyForRent WHERE propertyNo NOT IN (SELECT propertyNo FROM viewing);
